@@ -3,187 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S&I｜毛孩保健室 x 日子與你 - 生命靈數分析</title>
+    <title>S&I｜毛孩水晶靈數實驗室</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
 
         body {
-            font-family: 'Noto Sans TC', sans-serif; /* 內文用黑體 */
-            background-color: #fcfcfc;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fdfcf8;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            color: #4a4a4a;
+            color: #444;
         }
 
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
-            border: 1px solid #f0f0f0;
+            border: 1px solid #f2eadf;
+            backdrop-filter: blur(10px);
         }
 
-        /* LOGO 設計區 */
+        /* LOGO */
         .brand-header {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
             border-bottom: 1px solid #eee;
         }
         .brand-logo {
-            font-family: 'Noto Serif TC', serif; /* LOGO用襯線體，更有質感 */
-            font-size: 1.4rem;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #2c3e50;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin: 0;
         }
         .brand-subtitle {
-            font-size: 0.9rem;
-            color: #888;
+            font-size: 0.85rem;
+            color: #d4a373;
             margin-top: 8px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            font-weight: 500;
         }
 
-        /* 章節標題 */
+        /* 標題樣式 */
         .section-title {
             text-align: left;
             color: #2c3e50;
             font-weight: 600;
-            margin: 25px 0 15px 0;
-            font-size: 1.1rem;
+            margin: 30px 0 20px 0;
+            font-size: 1.15rem;
             display: flex;
             align-items: center;
+            font-family: 'Noto Serif TC', serif;
         }
         .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 20px;
-            background-color: #d4a373; /* 大地色系裝飾 */
+            content: '✦';
+            color: #d4a373;
             margin-right: 10px;
-            border-radius: 2px;
+            font-size: 1.2rem;
         }
 
-        /* 表單樣式 */
-        .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: #666; }
+        /* 表單與輸入框 */
+        .form-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: #666; font-weight: 500; }
         input[type="text"], input[type="date"], input[type="file"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             box-sizing: border-box;
             font-size: 1rem;
-            transition: border 0.3s;
-            background: #fafafa;
+            transition: all 0.3s;
+            background: #fff;
         }
-        input:focus { border-color: #d4a373; outline: none; background: #fff; }
+        input:focus { border-color: #d4a373; outline: none; box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.1); }
 
-        /* 心理測驗優化 */
+        /* 心理測驗卡片 */
         .quiz-item {
-            background: #fffbf5; /* 淡淡的暖色底 */
-            padding: 18px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            background: #fdfbf7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
             text-align: left;
-            border: 1px solid #f3e5d8;
+            border: 1px solid #f0e6dc;
         }
-        .quiz-question { font-weight: 500; margin-bottom: 12px; display: block; color: #5d4037; }
+        .quiz-question { font-weight: 600; margin-bottom: 15px; display: block; color: #5d4037; font-size: 1.05rem; }
         .quiz-options label {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 4px;
+            padding: 10px;
+            border-radius: 6px;
             font-size: 0.95rem;
+            transition: background 0.2s;
         }
-        .quiz-options label:hover { background: #f0e6dc; }
-        input[type="radio"] { margin-right: 10px; accent-color: #d4a373; }
+        .quiz-options label:hover { background: #efebe4; }
+        input[type="radio"] { margin-right: 12px; accent-color: #d4a373; transform: scale(1.1); }
 
-        /* 按鈕樣式 */
-        button {
-            background-color: #2c3e50;
+        /* 分析按鈕 */
+        .analyze-btn {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 30px;
             font-size: 16px;
-            letter-spacing: 1px;
-            border-radius: 6px;
+            letter-spacing: 1.5px;
+            border-radius: 50px;
             cursor: pointer;
             width: 100%;
-            margin-top: 25px;
+            margin-top: 30px;
             transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.2);
+            font-family: 'Noto Serif TC', serif;
         }
-        button:hover { background-color: #1a252f; transform: translateY(-1px); }
+        .analyze-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(44, 62, 80, 0.3); }
         
-        /* 結果區塊樣式 */
+        /* 結果區 */
         #resultArea {
             display: none;
-            margin-top: 50px;
-            padding-top: 30px;
+            margin-top: 60px;
+            padding-top: 40px;
             border-top: 1px solid #eee;
-            animation: fadeIn 1.2s ease;
+            animation: fadeIn 1.5s ease;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .pet-photo-preview {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             object-fit: cover;
             border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 0 0 1px #ddd, 0 10px 20px rgba(0,0,0,0.1);
-            margin: 0 auto 20px;
+            border: 5px solid #fff;
+            box-shadow: 0 0 0 1px #d4a373, 0 15px 30px rgba(0,0,0,0.1);
+            margin: 0 auto 25px;
             display: block;
         }
         
-        .result-badges {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            color: white;
-        }
-        .bg-num { background: #d4a373; } /* 靈數色 */
-        .bg-type { background: #8d99ae; } /* 性格色 */
-
-        .analysis-box {
-            text-align: left;
-            margin-top: 20px;
-            line-height: 1.8;
-            padding: 0 10px;
-        }
-        .analysis-box h4 {
-            font-family: 'Noto Serif TC', serif;
-            margin: 0 0 12px 0;
+        .result-title {
             color: #2c3e50;
-            font-size: 1.1rem;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-            display: inline-block;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
         }
+
+        /* 內容卡片樣式 */
+        .analysis-card {
+            text-align: left;
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .analysis-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: #d4a373;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .card-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .card-tag {
+            background: #fdf6e3;
+            color: #d35400;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
         .analysis-text {
             color: #555;
-            font-size: 0.95rem;
-            white-space: pre-wrap; /* 保留換行 */
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
             text-align: justify;
         }
+
+        /* 水晶區塊 */
+        .crystal-box {
+            background: #f4f8fb;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .crystal-icon { font-size: 24px; }
+        .crystal-info { font-size: 0.9rem; color: #34495e; }
+        .crystal-name { font-weight: bold; color: #2980b9; margin-bottom: 3px; display: block;}
+
+        /* 商城連結按鈕樣式 */
+        .shop-cta-box {
+            margin-top: 40px;
+            padding: 20px;
+            background: #fffcf5;
+            border-radius: 12px;
+            border: 1px dashed #d4a373;
+        }
+        .shop-btn {
+            display: inline-block;
+            background-color: #d4a373;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .shop-btn:hover {
+            background-color: #c08b5c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 163, 115, 0.5);
+        }
+
+        /* 版權頁尾 */
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; letter-spacing: 1px; }
 
     </style>
 </head>
@@ -192,7 +259,7 @@
 <div class="container">
     <div class="brand-header">
         <h1 class="brand-logo">S&I｜毛孩保健室 x 日子與你</h1>
-        <div class="brand-subtitle">Pet Numerology & Soul Analysis</div>
+        <div class="brand-subtitle">Crystal Energy & Soul Analysis</div>
     </div>
     
     <div class="section-title">Step 1. 建立毛孩檔案</div>
@@ -201,15 +268,15 @@
         <input type="text" id="petName" placeholder="輸入寶貝的名字...">
     </div>
     <div class="form-group">
-        <label>出生日期 (或相遇的那一天)</label>
+        <label>出生日期 (或相遇紀念日)</label>
         <input type="date" id="birthDate">
     </div>
     <div class="form-group">
-        <label>上傳一張最具代表性的照片</label>
+        <label>上傳一張最具靈性的照片</label>
         <input type="file" id="petPhoto" accept="image/*">
     </div>
 
-    <div class="section-title">Step 2. 關於牠的日常點滴</div>
+    <div class="section-title">Step 2. 關於牠的日常點滴 (心理測驗)</div>
     
     <div class="quiz-item">
         <span class="quiz-question">Q1. 當家裡有陌生訪客按門鈴時，牠的第一反應？</span>
@@ -238,63 +305,131 @@
         </div>
     </div>
 
-    <button onclick="analyzeAll()">開始解讀靈魂密碼</button>
+    <button class="analyze-btn" onclick="analyzeAll()">開始解讀靈魂水晶密碼</button>
 
     <div id="resultArea">
         <img id="previewImg" class="pet-photo-preview" src="" alt="寵物照片">
-        <h2 style="color:#2c3e50; font-family: 'Noto Serif TC', serif; margin-bottom:10px;">
+        <h2 class="result-title">
             <span id="displayName"></span> 的靈魂分析書
         </h2>
         
-        <div class="result-badges">
-            <div class="badge bg-num">生命靈數 <span id="resNum">?</span></div>
-            <div class="badge bg-type"><span id="resType">?</span></div>
-        </div>
-
-        <div class="analysis-box">
-            <h4>📜 靈數命格：靈魂深處的本質</h4>
+        <div class="analysis-card">
+            <div class="card-header">
+                <span class="card-title">📜 靈數命格：靈魂的本質</span>
+                <span class="card-tag">生命靈數 <span id="resNum">?</span></span>
+            </div>
             <div id="descNumerology" class="analysis-text">...</div>
+            
+            <div class="crystal-box">
+                <div class="crystal-icon">💎</div>
+                <div class="crystal-info">
+                    <span class="crystal-name">專屬能量水晶：<span id="crystalName"></span></span>
+                    <span id="crystalDesc"></span>
+                </div>
+            </div>
         </div>
 
-        <div class="analysis-box" style="margin-top:25px;">
-            <h4>🧠 性格側寫：現世的獨特模樣</h4>
+        <div class="analysis-card" style="border-left: 5px solid #8e44ad;">
+            <div class="card-header">
+                <span class="card-title">🔮 性格側寫：塔羅指引</span>
+                <span class="card-tag" style="background:#f3e5f5; color:#8e44ad;" id="tarotName">塔羅牌</span>
+            </div>
             <div id="descPersonality" class="analysis-text">...</div>
         </div>
         
-        <div style="margin-top: 30px; font-size: 0.8rem; color: #aaa;">
+        <div class="shop-cta-box">
+            <p style="color: #666; margin: 0 0 10px 0; font-size: 0.95rem;">想給 <span id="petNameRepeat" style="font-weight:bold; color:#d4a373;"></span> 最好的照顧嗎？</p>
+            <a href="https://www.shimoinu.shop/PetHealth" target="_blank" class="shop-btn">
+                🌿 S&I｜毛孩草本保健研究室
+            </a>
+        </div>
+
+        <div class="footer">
             S&I｜毛孩保健室 x 日子與你 © All Rights Reserved.
         </div>
     </div>
 </div>
 
 <script>
-    // 資料庫：生命靈數 (1-9) - 意境升級版
+    // 1. 生命靈數資料庫 (含水晶推薦)
     const numerologyData = {
-        1: "【天生自帶光芒的領袖靈魂】\n\n牠擁有強大的自我意識，獨立且勇敢，就像一位天生的小國王或女王。在牠的眼神裡，你看不到畏縮，只有對世界的好奇與掌控欲。\n\n牠對主人的愛是霸道而專一的——「你是我的，誰都不能欺負你」。雖然有時稍顯固執，不喜歡被過度強迫，但那正是牠靈魂中最耀眼的光芒。給予牠足夠的尊重與讚美，牠將用一生的忠誠，成為你最堅強的後盾。",
-        
-        2: "【與你靈魂共振的貼心伴侶】\n\n牠是一隻擁有極高感知力的毛孩，纖細敏感，彷彿能讀懂你內心最細微的情緒波動。牠不喜歡爭鬥，這輩子最大的願望，就是安靜地依偎在你身旁。\n\n對牠來說，世界很大，但你是唯一的安全港。當你難過時，牠會是第一個發現並默默過來蹭你、安慰你的存在。牠的愛是水做的，溫柔地包覆著你的生活，請給予牠滿滿的安全感，因為牠真的很需要你。",
-        
-        3: "【散播歡樂的純真光之子】\n\n牠的靈魂裡住著一個永遠長不大的孩子，對萬物充滿好奇，彷彿世界對牠來說就是一座巨大的遊樂場。無論幾歲，牠那雙清澈的眼睛裡總是閃爍著淘氣與快樂的光芒。\n\n牠是天生的社交高手，能輕易融化陌生人的心防。雖然有時因為太過興奮而顯得有些「ㄎㄧㄤ」或不受控，但這份純粹的快樂感染力，正是牠帶給你最好的禮物。有牠在的日子，家裡永遠不會缺乏笑聲。",
-        
-        4: "【守護家園的穩重靠山】\n\n「秩序」與「安穩」是牠靈魂的關鍵字。牠不喜歡太多突如其來的變動，規律的生活節奏讓牠感到安心。牠或許不是最熱情撲人的那一隻，但絕對是最讓你放心的那一隻。\n\n牠對家有著強烈的責任感，默默地守護著屬於你們的空間。牠的愛是內斂而厚重的，像大地一樣承接住你的喜怒哀樂。一旦認定了你，這份契約就是一輩子，不離不棄，堅若磐石。",
-        
-        5: "【追求自由的風之子】\n\n牠的靈魂是自由奔放的風，討厭束縛，熱愛探索未知的邊界。牠非常聰明，有時甚至讓你覺得牠「成精」了，總能想出各種鬼點子來挑戰你的極限。\n\n不要試圖完全掌控牠，給予牠信任與空間，牠會展現出驚人的靈性。牠是帶領你走出舒適圈的導師，用行動告訴你：生活本該充滿冒險與驚喜。與牠相處，每一天都是一場嶄新的旅程。",
-        
-        6: "【溫暖療癒的愛之化身】\n\n數字 6 代表著無私的愛與療癒。這隻毛孩天生具備照顧者的特質，對於家中的弱小成員（如小孩或其他小動物）特別有耐心。牠非常顧家，喜歡一家人團聚的溫馨氛圍。\n\n牠是家裡的情感黏著劑，當氣氛緊張時，牠會焦慮地試圖調停。牠對你的愛是全面性的包容，那是源自靈魂深處的溫柔。只要看著牠安穩的睡臉，你一天的疲憊都會被奇蹟般地治癒。",
-        
-        7: "【優雅神秘的哲學家】\n\n牠與眾不同，散發著一種獨特的氣質，彷彿總是若有所思。比起熱鬧的聚會，牠更享受獨處的時光，或是靜靜地趴在窗邊觀察這個世界。\n\n牠不是不愛你，只是牠愛人的方式很含蓄、很有分寸。牠需要自己的私密空間來整理思緒（是的，毛孩也會思考）。懂牠的人會發現，牠與你之間有一種不需要言語的心電感應，那是一種高層次的靈魂默契。",
-        
-        8: "【氣場強大的富貴萌寵】\n\n數字 8 象徵著力量與豐盛。這隻毛孩天生氣場強大，精力旺盛，對於喜歡的東西（無論是美食、玩具還是舒適的床）展現出極高的鑑賞力與執著。\n\n牠聰明且目標明確，訓練起來通常很有成就感，因為牠懂得「付出就能得到獎勵」的道理。牠就像家裡的小小守護神，帶著一股富貴之氣，能為家裡帶來滿滿的活力與正能量。",
-        
-        9: "【包容萬物的慈愛老靈魂】\n\n牠的靈魂經歷了許多輪迴，因此表現出超乎年齡的淡定與隨和。牠幾乎沒有脾氣，對於陌生人、其他動物都抱持著極大的善意。這是一隻真正意義上的「天使毛孩」。\n\n牠不太會爭寵，總是默默地在角落守候。牠的愛是大愛，不求回報。跟牠在一起，你會學會什麼是無條件的接納與放下。請多花時間擁抱牠，感謝這個老靈魂願意今生來到你身邊陪伴你。"
+        1: {
+            text: "【天生自帶光芒的領袖靈魂】\n牠擁有強大的自我意識與獨立性，就像一位天生的小國王。牠不喜歡被過度強迫，但對認定的人展現絕對的忠誠。牠的愛是霸氣的——「你是我的，誰都不能欺負你」。",
+            crystals: "太陽石 & 白水晶",
+            crystalDesc: "「太陽石」能增強牠的自信與活力，保護氣場；「白水晶」則能幫助牠在激動時穩定思緒，平衡過剩的精力。"
+        },
+        2: {
+            text: "【與你靈魂共振的貼心伴侶】\n纖細敏感的牠，彷彿能讀懂你內心最細微的情緒。牠不喜歡爭鬥，這輩子最大的願望，就是安靜地依偎在你身旁。當你難過時，牠總是第一個發現並給予安慰的天使。",
+            crystals: "粉晶 & 月光石",
+            crystalDesc: "「粉晶」能放大牠溫柔的愛，增加安全感；「月光石」則能舒緩牠分離焦慮的情緒，讓牠獨處時也能感到平靜。"
+        },
+        3: {
+            text: "【散播歡樂的純真光之子】\n牠的靈魂裡住著一個永遠長不大的孩子，對世界充滿好奇。牠是天生的社交高手，雖然有時因為太興奮而顯得不受控，但那份純粹的快樂是家裡最好的抗憂鬱劑。",
+            crystals: "黃水晶 & 天河石",
+            crystalDesc: "「黃水晶」對應太陽輪，守護牠的快樂與消化系統；「天河石」則能幫助牠表達情緒，減少因為過度興奮而造成的焦躁。"
+        },
+        4: {
+            text: "【守護家園的穩重靠山】\n「秩序」與「安穩」是牠的關鍵字。牠不喜歡變動，規律的生活讓牠安心。牠或許不是最熱情撲人的，但絕對是最讓你放心、默默守護家園的忠誠衛士。",
+            crystals: "黑曜石 & 茶晶",
+            crystalDesc: "「黑曜石」擁有強大的落地能量，能排除負能量並保護牠；「茶晶」則能增強牠的安全感，讓穩重的牠更加健康長壽。"
+        },
+        5: {
+            text: "【追求自由的風之子】\n牠的靈魂自由奔放，討厭束縛，熱愛探索未知。牠非常聰明，總能想出各種鬼點子。不要試圖完全掌控牠，給予信任，牠會是你生活最有趣的冒險夥伴。",
+            crystals: "海藍寶 & 螢石",
+            crystalDesc: "「海藍寶」象徵自由與溝通，保護牠在探索時的平安；「螢石」則被稱為天才之石，能幫助聰明的牠集中注意力，減少搗蛋。"
+        },
+        6: {
+            text: "【溫暖療癒的愛之化身】\n這隻毛孩天生具備照顧者的特質，對弱小特別有耐心。牠非常顧家，是家裡的情感黏著劑。牠對你的愛是全面性的包容，源自靈魂深處的溫柔。",
+            crystals: "菱錳礦 & 紫水晶",
+            crystalDesc: "「菱錳礦」能修復情感創傷，讓敏感的牠感受到被愛；「紫水晶」則能提升靈性，幫助牠在照顧家人時，也能放鬆自己的神經。"
+        },
+        7: {
+            text: "【優雅神秘的哲學家】\n牠散發著獨特氣質，比起熱鬧聚會，更享受獨處觀察世界。牠與你之間有一種不需要言語的心電感應，那是一種高層次的靈魂默契。",
+            crystals: "青金石 & 拉長石",
+            crystalDesc: "「青金石」能開啟智慧與洞察力，適合牠冷靜的性格；「拉長石」則能保護牠敏感的氣場，避免吸收過多外界雜亂的能量。"
+        },
+        8: {
+            text: "【氣場強大的富貴萌寵】\n牠天生氣場強大，精力旺盛，對喜歡的東西（美食、玩具）有極高的鑑賞力。牠就像家裡的小小守護神，能為家裡帶來滿滿的活力與富足的能量。",
+            crystals: "黃鐵礦 & 石榴石",
+            crystalDesc: "「黃鐵礦」象徵富足與力量，與牠的霸氣相得益彰；「石榴石」則能促進血液循環，維持牠旺盛的生命力與行動力。"
+        },
+        9: {
+            text: "【包容萬物的慈愛老靈魂】\n牠的靈魂經歷許多輪迴，表現出超乎年齡的淡定。牠幾乎沒有脾氣，對任何人都抱持善意。這是一隻真正意義上的「天使」，教導你無條件的愛。",
+            crystals: "白幽靈 & 蘇打石",
+            crystalDesc: "「白幽靈」能淨化磁場，保護這純淨的老靈魂；「蘇打石」能帶來深層的平靜，守護牠不被世俗的紛擾影響。"
+        }
     };
 
-    // 資料庫：心理測驗結果 (根據分數範圍)
+    // 2. 心理測驗 + 塔羅牌對應
     function getQuizResult(score) {
-        if (score >= 50) return { type: "熱情小火球", desc: "精力旺盛到讓人懷疑是不是裝了電池！牠對世界充滿熱情，但也可能有點破壞力，需要很多陪伴與放電。" };
-        if (score >= 40) return { type: "陽光交際花", desc: "非常親人且貪吃，是大家眼中的開心果。只要有吃的或玩的，牠就是你最好的朋友。" };
-        if (score >= 25) return { type: "傲嬌小貴族", desc: "有自己的堅持與原則，不是隨叫隨到的類型。但當牠主動撒嬌時，那種反差萌會讓你融化。" };
-        return { type: "佛系哲學家", desc: "淡定是牠的代名詞。對於外在環境變化不太在意，喜歡安靜地觀察世界，是最穩定的陪伴。" };
+        if (score >= 55) {
+            return { 
+                tarot: "戰車牌 (The Chariot)", 
+                desc: "這張牌象徵著意志力與衝勁。你的毛孩擁有源源不絕的能量，就像戰車一樣勇往直前。牠性格直率、熱情，有時甚至有點魯莽，但那都是因為牠太愛這個世界了。對牠來說，每一天都是一場全新的冒險，牠需要大量的活動與讚美來滿足牠的英雄主義。" 
+            };
+        }
+        if (score >= 45) {
+            return { 
+                tarot: "皇后牌 (The Empress)", 
+                desc: "這張牌象徵著豐盛、感官享受與愛。你的毛孩是個標準的「享樂主義者」，牠熱愛美食、喜歡被人撫摸，懂得如何讓自己過得舒服。牠在社交場合通常游刃有餘，大家都喜歡牠。照顧牠的重點在於控制體重（因為太愛吃了）以及給予大量的肢體接觸。" 
+            };
+        }
+        if (score >= 35) {
+            return { 
+                tarot: "愚者牌 (The Fool)", 
+                desc: "這張牌象徵著天真與無限的可能性。牠是一隻樂天派，有點傻氣，常常做出讓你哭笑不得的舉動。牠不像其他毛孩那麼世故，保留了最原始的純真。有時候牠會顯得有點笨拙或脫線，但那正是牠最迷人的地方，請守護牠這份難得的赤子之心。" 
+            };
+        }
+        if (score >= 25) {
+            return { 
+                tarot: "皇帝牌 (The Emperor)", 
+                desc: "這張牌象徵著權威與規則。牠是一隻非常有原則的毛孩（也可以說是傲嬌）。牠有自己的地盤意識，不喜歡被隨意打擾。牠愛你的方式不是黏踢踢，而是像個守衛一樣在旁邊看著你。贏得牠的尊重比贏得牠的撒嬌更重要，一旦牠認可你，牠就是最忠誠的騎士。" 
+            };
+        }
+        return { 
+            tarot: "隱士牌 (The Hermit)", 
+            desc: "這張牌象徵著內省與智慧。你的毛孩擁有一個老靈魂，比起瘋狂玩耍，牠更喜歡安靜地觀察。牠可能比較慢熟，對陌生環境謹慎，但對主人的依賴極深。牠是你最好的傾聽者，你們之間的連結是精神層面的。不要強迫牠社交，給牠一個安靜的角落，牠會覺得最自在。" 
+        };
     }
 
     function analyzeAll() {
@@ -302,24 +437,21 @@
         const dateStr = document.getElementById('birthDate').value;
         const photoInput = document.getElementById('petPhoto');
         
-        if (!name || !dateStr) { alert("請記得填寫名字和生日，讓我們能連結牠的數據！"); return; }
+        if (!name || !dateStr) { alert("請填寫名字和日期，讓我們能連結水晶能量！"); return; }
         
-        // 檢查心理測驗
         const q1 = document.querySelector('input[name="q1"]:checked');
         const q2 = document.querySelector('input[name="q2"]:checked');
         const q3 = document.querySelector('input[name="q3"]:checked');
-        if (!q1 || !q2 || !q3) { alert("心理測驗還有題目沒做完喔！這對分析很重要！"); return; }
+        if (!q1 || !q2 || !q3) { alert("請完成所有心理測驗題目，才能抽出塔羅牌喔！"); return; }
 
-        // 1. 照片處理
         if (photoInput.files && photoInput.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) { document.getElementById('previewImg').src = e.target.result; }
             reader.readAsDataURL(photoInput.files[0]);
         } else {
-            document.getElementById('previewImg').src = "https://via.placeholder.com/160?text=Pet";
+            document.getElementById('previewImg').src = "https://via.placeholder.com/180?text=Pet";
         }
 
-        // 2. 計算生命靈數
         let numbers = dateStr.replace(/-/g, ''); 
         let sum = 0;
         for (let char of numbers) sum += parseInt(char);
@@ -330,19 +462,24 @@
             sum = tempSum;
         }
 
-        // 3. 計算心理測驗分數
         let quizScore = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
         let quizResult = getQuizResult(quizScore);
 
-        // 4. 顯示結果
+        // 填入資料
         document.getElementById('displayName').textContent = name;
-        document.getElementById('resNum').textContent = sum;
-        document.getElementById('resType').textContent = quizResult.type;
+        document.getElementById('petNameRepeat').textContent = name; // 更新導流文案中的名字
         
-        // 組合顯示文案
-        document.getElementById('descNumerology').textContent = numerologyData[sum];
-        document.getElementById('descPersonality').textContent = quizResult.desc;
+        // 1. 靈數與水晶
+        document.getElementById('resNum').textContent = sum;
+        document.getElementById('descNumerology').innerText = numerologyData[sum].text;
+        document.getElementById('crystalName').innerText = numerologyData[sum].crystals;
+        document.getElementById('crystalDesc').innerText = numerologyData[sum].crystalDesc;
 
+        // 2. 塔羅與性格
+        document.getElementById('tarotName').innerText = quizResult.tarot;
+        document.getElementById('descPersonality').innerText = quizResult.desc;
+
+        // 顯示
         const resultArea = document.getElementById('resultArea');
         resultArea.style.display = 'block';
         resultArea.scrollIntoView({behavior: "smooth"});
