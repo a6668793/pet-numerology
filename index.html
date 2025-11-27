@@ -3,174 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>毛孩生命靈數分析</title>
+    <title>S&I｜毛孩保健室 x 日子與你 - 生命靈數分析</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdf6e3;
+            font-family: 'Noto Sans TC', sans-serif; /* 內文用黑體 */
+            background-color: #fcfcfc;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            color: #4a4a4a;
         }
+
         .container {
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
+            border: 1px solid #f0f0f0;
         }
-        h1 { color: #d35400; margin-bottom: 20px; }
+
+        /* LOGO 設計區 */
+        .brand-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .brand-logo {
+            font-family: 'Noto Serif TC', serif; /* LOGO用襯線體，更有質感 */
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            letter-spacing: 1.5px;
+            margin: 0;
+        }
+        .brand-subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* 章節標題 */
+        .section-title {
+            text-align: left;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 20px;
+            background-color: #d4a373; /* 大地色系裝飾 */
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        /* 表單樣式 */
         .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: #666; }
         input[type="text"], input[type="date"], input[type="file"] {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #eee;
-            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 1rem;
+            transition: border 0.3s;
+            background: #fafafa;
         }
+        input:focus { border-color: #d4a373; outline: none; background: #fff; }
+
+        /* 心理測驗優化 */
+        .quiz-item {
+            background: #fffbf5; /* 淡淡的暖色底 */
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+            border: 1px solid #f3e5d8;
+        }
+        .quiz-question { font-weight: 500; margin-bottom: 12px; display: block; color: #5d4037; }
+        .quiz-options label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .quiz-options label:hover { background: #f0e6dc; }
+        input[type="radio"] { margin-right: 10px; accent-color: #d4a373; }
+
+        /* 按鈕樣式 */
         button {
-            background-color: #e67e22;
+            background-color: #2c3e50;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 15px 30px;
             font-size: 16px;
-            border-radius: 50px;
+            letter-spacing: 1px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
-            transition: background 0.3s;
+            margin-top: 25px;
+            transition: all 0.3s;
         }
-        button:hover { background-color: #d35400; }
+        button:hover { background-color: #1a252f; transform: translateY(-1px); }
         
         /* 結果區塊樣式 */
         #resultArea {
-            display: none; /* 預設隱藏 */
-            margin-top: 30px;
-            border-top: 2px dashed #eee;
-            padding-top: 20px;
+            display: none;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            animation: fadeIn 1.2s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         .pet-photo-preview {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             object-fit: cover;
             border-radius: 50%;
-            border: 5px solid #f39c12;
-            margin: 0 auto 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 1px #ddd, 0 10px 20px rgba(0,0,0,0.1);
+            margin: 0 auto 20px;
             display: block;
         }
-        .number-badge {
-            background: #f1c40f;
-            color: #fff;
-            font-size: 24px;
-            font-weight: bold;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            border-radius: 50%;
-            margin: 0 auto;
+        
+        .result-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
-        .pet-desc { color: #666; line-height: 1.6; margin-top: 10px; }
+        .badge {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+        .bg-num { background: #d4a373; } /* 靈數色 */
+        .bg-type { background: #8d99ae; } /* 性格色 */
+
+        .analysis-box {
+            text-align: left;
+            margin-top: 20px;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+        .analysis-box h4 {
+            font-family: 'Noto Serif TC', serif;
+            margin: 0 0 12px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        .analysis-text {
+            color: #555;
+            font-size: 0.95rem;
+            white-space: pre-wrap; /* 保留換行 */
+            text-align: justify;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🐾 毛孩生命靈數 🐾</h1>
+    <div class="brand-header">
+        <h1 class="brand-logo">S&I｜毛孩保健室 x 日子與你</h1>
+        <div class="brand-subtitle">Pet Numerology & Soul Analysis</div>
+    </div>
     
+    <div class="section-title">Step 1. 建立毛孩檔案</div>
     <div class="form-group">
         <label>毛孩的名字</label>
-        <input type="text" id="petName" placeholder="例如：旺財">
+        <input type="text" id="petName" placeholder="輸入寶貝的名字...">
     </div>
-    
     <div class="form-group">
-        <label>出生日期 (不知道可填領養日)</label>
+        <label>出生日期 (或相遇的那一天)</label>
         <input type="date" id="birthDate">
     </div>
-
     <div class="form-group">
-        <label>上傳萌照</label>
+        <label>上傳一張最具代表性的照片</label>
         <input type="file" id="petPhoto" accept="image/*">
     </div>
 
-    <button onclick="calculateNumerology()">開始分析</button>
+    <div class="section-title">Step 2. 關於牠的日常點滴</div>
+    
+    <div class="quiz-item">
+        <span class="quiz-question">Q1. 當家裡有陌生訪客按門鈴時，牠的第一反應？</span>
+        <div class="quiz-options">
+            <label><input type="radio" name="q1" value="10"> 衝到門口大聲宣告主權 (警覺)</label>
+            <label><input type="radio" name="q1" value="20"> 搖著尾巴期待新朋友 (熱情)</label>
+            <label><input type="radio" name="q1" value="5"> 淡定觀察，或躲回安全角落 (謹慎)</label>
+        </div>
+    </div>
+
+    <div class="quiz-item">
+        <span class="quiz-question">Q2. 放飯時間到了，牠的用餐風格是？</span>
+        <div class="quiz-options">
+            <label><input type="radio" name="q2" value="20"> 光盤行動派！幾秒鐘就吃光 (吃貨)</label>
+            <label><input type="radio" name="q2" value="10"> 心情好才吃，需要人陪或加菜 (挑剔)</label>
+            <label><input type="radio" name="q2" value="5"> 優雅進食，細嚼慢嚥很有規矩 (優雅)</label>
+        </div>
+    </div>
+
+    <div class="quiz-item">
+        <span class="quiz-question">Q3. 平常在家的休閒活動主要是？</span>
+        <div class="quiz-options">
+            <label><input type="radio" name="q3" value="20"> 充滿電量！跑酷、玩玩具停不下來 (活潑)</label>
+            <label><input type="radio" name="q3" value="5"> 專業陪睡員，哪裡舒服哪裡躺 (慵懶)</label>
+            <label><input type="radio" name="q3" value="10"> 你的跟屁蟲，你在哪牠就在哪 (黏人)</label>
+        </div>
+    </div>
+
+    <button onclick="analyzeAll()">開始解讀靈魂密碼</button>
 
     <div id="resultArea">
         <img id="previewImg" class="pet-photo-preview" src="" alt="寵物照片">
-        <h2><span id="displayName"></span> 的生命靈數是</h2>
-        <div class="number-badge" id="displayNumber">?</div>
-        <h3 id="traitTitle" style="color:#d35400;"></h3>
-        <p class="pet-desc" id="traitDescription"></p>
+        <h2 style="color:#2c3e50; font-family: 'Noto Serif TC', serif; margin-bottom:10px;">
+            <span id="displayName"></span> 的靈魂分析書
+        </h2>
+        
+        <div class="result-badges">
+            <div class="badge bg-num">生命靈數 <span id="resNum">?</span></div>
+            <div class="badge bg-type"><span id="resType">?</span></div>
+        </div>
+
+        <div class="analysis-box">
+            <h4>📜 靈數命格：靈魂深處的本質</h4>
+            <div id="descNumerology" class="analysis-text">...</div>
+        </div>
+
+        <div class="analysis-box" style="margin-top:25px;">
+            <h4>🧠 性格側寫：現世的獨特模樣</h4>
+            <div id="descPersonality" class="analysis-text">...</div>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 0.8rem; color: #aaa;">
+            S&I｜毛孩保健室 x 日子與你 © All Rights Reserved.
+        </div>
     </div>
 </div>
 
 <script>
-    // 定義 1-9 號人的寵物個性資料庫
-    const personalities = {
-        1: { title: "天生的領導者", desc: "這隻毛孩非常有主見，喜歡當老大。牠獨立、勇敢，有時候會有點固執，但絕對忠誠於牠認定的主人。" },
-        2: { title: "貼心的黏人精", desc: "牠非常敏感且依賴，最喜歡跟在你身邊。對於情緒的感知力很強，當你難過時，牠會第一個過來安慰你。" },
-        3: { title: "樂觀的開心果", desc: "永遠像個長不大的孩子！好奇心強，喜歡玩耍，走到哪裡都能交到朋友，是家裡的氣氛製造機。" },
-        4: { title: "穩重的守護者", desc: "牠喜歡規律的生活，討厭變動。非常有安全感，會盡責地守護家園，是一隻讓人很放心的毛孩。" },
-        5: { title: "崇尚自由的冒險家", desc: "不喜歡被關著，喜歡探索新環境。牠很聰明但有點不受控，需要很多活動空間來發洩精力。" },
-        6: { title: "充滿愛的療癒師", desc: "這是一隻非常有愛心的毛孩，喜歡照顧其他同伴或小孩。牠非常顧家，是完美的家庭伴侶。" },
-        7: { title: "高冷的哲學家", desc: "有時候你會覺得牠在思考貓生/狗生。牠需要自己的空間，比較安靜，不一定喜歡隨時被打擾。" },
-        8: { title: "識貨的享受家", desc: "牠喜歡好吃的東西和舒服的床！氣場強大，精力旺盛，訓練起來會非常有成就感。" },
-        9: { title: "無私的大愛天使", desc: "牠的個性隨和，幾乎不會生氣。對於陌生人或其他動物都非常友善，擁有極高的包容力。" }
+    // 資料庫：生命靈數 (1-9) - 意境升級版
+    const numerologyData = {
+        1: "【天生自帶光芒的領袖靈魂】\n\n牠擁有強大的自我意識，獨立且勇敢，就像一位天生的小國王或女王。在牠的眼神裡，你看不到畏縮，只有對世界的好奇與掌控欲。\n\n牠對主人的愛是霸道而專一的——「你是我的，誰都不能欺負你」。雖然有時稍顯固執，不喜歡被過度強迫，但那正是牠靈魂中最耀眼的光芒。給予牠足夠的尊重與讚美，牠將用一生的忠誠，成為你最堅強的後盾。",
+        
+        2: "【與你靈魂共振的貼心伴侶】\n\n牠是一隻擁有極高感知力的毛孩，纖細敏感，彷彿能讀懂你內心最細微的情緒波動。牠不喜歡爭鬥，這輩子最大的願望，就是安靜地依偎在你身旁。\n\n對牠來說，世界很大，但你是唯一的安全港。當你難過時，牠會是第一個發現並默默過來蹭你、安慰你的存在。牠的愛是水做的，溫柔地包覆著你的生活，請給予牠滿滿的安全感，因為牠真的很需要你。",
+        
+        3: "【散播歡樂的純真光之子】\n\n牠的靈魂裡住著一個永遠長不大的孩子，對萬物充滿好奇，彷彿世界對牠來說就是一座巨大的遊樂場。無論幾歲，牠那雙清澈的眼睛裡總是閃爍著淘氣與快樂的光芒。\n\n牠是天生的社交高手，能輕易融化陌生人的心防。雖然有時因為太過興奮而顯得有些「ㄎㄧㄤ」或不受控，但這份純粹的快樂感染力，正是牠帶給你最好的禮物。有牠在的日子，家裡永遠不會缺乏笑聲。",
+        
+        4: "【守護家園的穩重靠山】\n\n「秩序」與「安穩」是牠靈魂的關鍵字。牠不喜歡太多突如其來的變動，規律的生活節奏讓牠感到安心。牠或許不是最熱情撲人的那一隻，但絕對是最讓你放心的那一隻。\n\n牠對家有著強烈的責任感，默默地守護著屬於你們的空間。牠的愛是內斂而厚重的，像大地一樣承接住你的喜怒哀樂。一旦認定了你，這份契約就是一輩子，不離不棄，堅若磐石。",
+        
+        5: "【追求自由的風之子】\n\n牠的靈魂是自由奔放的風，討厭束縛，熱愛探索未知的邊界。牠非常聰明，有時甚至讓你覺得牠「成精」了，總能想出各種鬼點子來挑戰你的極限。\n\n不要試圖完全掌控牠，給予牠信任與空間，牠會展現出驚人的靈性。牠是帶領你走出舒適圈的導師，用行動告訴你：生活本該充滿冒險與驚喜。與牠相處，每一天都是一場嶄新的旅程。",
+        
+        6: "【溫暖療癒的愛之化身】\n\n數字 6 代表著無私的愛與療癒。這隻毛孩天生具備照顧者的特質，對於家中的弱小成員（如小孩或其他小動物）特別有耐心。牠非常顧家，喜歡一家人團聚的溫馨氛圍。\n\n牠是家裡的情感黏著劑，當氣氛緊張時，牠會焦慮地試圖調停。牠對你的愛是全面性的包容，那是源自靈魂深處的溫柔。只要看著牠安穩的睡臉，你一天的疲憊都會被奇蹟般地治癒。",
+        
+        7: "【優雅神秘的哲學家】\n\n牠與眾不同，散發著一種獨特的氣質，彷彿總是若有所思。比起熱鬧的聚會，牠更享受獨處的時光，或是靜靜地趴在窗邊觀察這個世界。\n\n牠不是不愛你，只是牠愛人的方式很含蓄、很有分寸。牠需要自己的私密空間來整理思緒（是的，毛孩也會思考）。懂牠的人會發現，牠與你之間有一種不需要言語的心電感應，那是一種高層次的靈魂默契。",
+        
+        8: "【氣場強大的富貴萌寵】\n\n數字 8 象徵著力量與豐盛。這隻毛孩天生氣場強大，精力旺盛，對於喜歡的東西（無論是美食、玩具還是舒適的床）展現出極高的鑑賞力與執著。\n\n牠聰明且目標明確，訓練起來通常很有成就感，因為牠懂得「付出就能得到獎勵」的道理。牠就像家裡的小小守護神，帶著一股富貴之氣，能為家裡帶來滿滿的活力與正能量。",
+        
+        9: "【包容萬物的慈愛老靈魂】\n\n牠的靈魂經歷了許多輪迴，因此表現出超乎年齡的淡定與隨和。牠幾乎沒有脾氣，對於陌生人、其他動物都抱持著極大的善意。這是一隻真正意義上的「天使毛孩」。\n\n牠不太會爭寵，總是默默地在角落守候。牠的愛是大愛，不求回報。跟牠在一起，你會學會什麼是無條件的接納與放下。請多花時間擁抱牠，感謝這個老靈魂願意今生來到你身邊陪伴你。"
     };
 
-    function calculateNumerology() {
+    // 資料庫：心理測驗結果 (根據分數範圍)
+    function getQuizResult(score) {
+        if (score >= 50) return { type: "熱情小火球", desc: "精力旺盛到讓人懷疑是不是裝了電池！牠對世界充滿熱情，但也可能有點破壞力，需要很多陪伴與放電。" };
+        if (score >= 40) return { type: "陽光交際花", desc: "非常親人且貪吃，是大家眼中的開心果。只要有吃的或玩的，牠就是你最好的朋友。" };
+        if (score >= 25) return { type: "傲嬌小貴族", desc: "有自己的堅持與原則，不是隨叫隨到的類型。但當牠主動撒嬌時，那種反差萌會讓你融化。" };
+        return { type: "佛系哲學家", desc: "淡定是牠的代名詞。對於外在環境變化不太在意，喜歡安靜地觀察世界，是最穩定的陪伴。" };
+    }
+
+    function analyzeAll() {
         const name = document.getElementById('petName').value;
-        const dateStr = document.getElementById('birthDate').value; // 格式 yyyy-mm-dd
+        const dateStr = document.getElementById('birthDate').value;
         const photoInput = document.getElementById('petPhoto');
+        
+        if (!name || !dateStr) { alert("請記得填寫名字和生日，讓我們能連結牠的數據！"); return; }
+        
+        // 檢查心理測驗
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const q3 = document.querySelector('input[name="q3"]:checked');
+        if (!q1 || !q2 || !q3) { alert("心理測驗還有題目沒做完喔！這對分析很重要！"); return; }
 
-        if (!name || !dateStr) {
-            alert("請輸入名字和日期喔！");
-            return;
-        }
-
-        // 1. 處理照片預覽 (使用 FileReader，不需要上傳伺服器)
+        // 1. 照片處理
         if (photoInput.files && photoInput.files[0]) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previewImg').src = e.target.result;
-            }
+            reader.onload = function(e) { document.getElementById('previewImg').src = e.target.result; }
             reader.readAsDataURL(photoInput.files[0]);
         } else {
-            // 如果沒傳照片，給一個預設圖或隱藏
-            document.getElementById('previewImg').src = "https://placehold.co/150x150?text=No+Image";
+            document.getElementById('previewImg').src = "https://via.placeholder.com/160?text=Pet";
         }
 
         // 2. 計算生命靈數
-        // 移除 - 符號，變成純數字字串，例如 20231127
         let numbers = dateStr.replace(/-/g, ''); 
         let sum = 0;
-        
-        // 第一次加總
-        for (let char of numbers) {
-            sum += parseInt(char);
-        }
-
-        // 遞迴加總直到變成個位數 (1-9)
+        for (let char of numbers) sum += parseInt(char);
         while (sum > 9) {
             let tempSum = 0;
             let sumStr = sum.toString();
-            for (let char of sumStr) {
-                tempSum += parseInt(char);
-            }
+            for (let char of sumStr) tempSum += parseInt(char);
             sum = tempSum;
         }
 
-        // 3. 顯示結果
-        document.getElementById('displayName').textContent = name;
-        document.getElementById('displayNumber').textContent = sum;
-        document.getElementById('traitTitle').textContent = personalities[sum].title;
-        document.getElementById('traitDescription').textContent = personalities[sum].desc;
+        // 3. 計算心理測驗分數
+        let quizScore = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
+        let quizResult = getQuizResult(quizScore);
 
-        document.getElementById('resultArea').style.display = 'block';
+        // 4. 顯示結果
+        document.getElementById('displayName').textContent = name;
+        document.getElementById('resNum').textContent = sum;
+        document.getElementById('resType').textContent = quizResult.type;
+        
+        // 組合顯示文案
+        document.getElementById('descNumerology').textContent = numerologyData[sum];
+        document.getElementById('descPersonality').textContent = quizResult.desc;
+
+        const resultArea = document.getElementById('resultArea');
+        resultArea.style.display = 'block';
+        resultArea.scrollIntoView({behavior: "smooth"});
     }
 </script>
 
