@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛孩生命靈數分析</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdf6e3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 { color: #d35400; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input[type="text"], input[type="date"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #d35400; }
+        
+        /* 結果區塊樣式 */
+        #resultArea {
+            display: none; /* 預設隱藏 */
+            margin-top: 30px;
+            border-top: 2px dashed #eee;
+            padding-top: 20px;
+        }
+        .pet-photo-preview {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #f39c12;
+            margin: 0 auto 15px;
+            display: block;
+        }
+        .number-badge {
+            background: #f1c40f;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .pet-desc { color: #666; line-height: 1.6; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐾 毛孩生命靈數 🐾</h1>
+    
+    <div class="form-group">
+        <label>毛孩的名字</label>
+        <input type="text" id="petName" placeholder="例如：旺財">
+    </div>
+    
+    <div class="form-group">
+        <label>出生日期 (不知道可填領養日)</label>
+        <input type="date" id="birthDate">
+    </div>
+
+    <div class="form-group">
+        <label>上傳萌照</label>
+        <input type="file" id="petPhoto" accept="image/*">
+    </div>
+
+    <button onclick="calculateNumerology()">開始分析</button>
+
+    <div id="resultArea">
+        <img id="previewImg" class="pet-photo-preview" src="" alt="寵物照片">
+        <h2><span id="displayName"></span> 的生命靈數是</h2>
+        <div class="number-badge" id="displayNumber">?</div>
+        <h3 id="traitTitle" style="color:#d35400;"></h3>
+        <p class="pet-desc" id="traitDescription"></p>
+    </div>
+</div>
+
+<script>
+    // 定義 1-9 號人的寵物個性資料庫
+    const personalities = {
+        1: { title: "天生的領導者", desc: "這隻毛孩非常有主見，喜歡當老大。牠獨立、勇敢，有時候會有點固執，但絕對忠誠於牠認定的主人。" },
+        2: { title: "貼心的黏人精", desc: "牠非常敏感且依賴，最喜歡跟在你身邊。對於情緒的感知力很強，當你難過時，牠會第一個過來安慰你。" },
+        3: { title: "樂觀的開心果", desc: "永遠像個長不大的孩子！好奇心強，喜歡玩耍，走到哪裡都能交到朋友，是家裡的氣氛製造機。" },
+        4: { title: "穩重的守護者", desc: "牠喜歡規律的生活，討厭變動。非常有安全感，會盡責地守護家園，是一隻讓人很放心的毛孩。" },
+        5: { title: "崇尚自由的冒險家", desc: "不喜歡被關著，喜歡探索新環境。牠很聰明但有點不受控，需要很多活動空間來發洩精力。" },
+        6: { title: "充滿愛的療癒師", desc: "這是一隻非常有愛心的毛孩，喜歡照顧其他同伴或小孩。牠非常顧家，是完美的家庭伴侶。" },
+        7: { title: "高冷的哲學家", desc: "有時候你會覺得牠在思考貓生/狗生。牠需要自己的空間，比較安靜，不一定喜歡隨時被打擾。" },
+        8: { title: "識貨的享受家", desc: "牠喜歡好吃的東西和舒服的床！氣場強大，精力旺盛，訓練起來會非常有成就感。" },
+        9: { title: "無私的大愛天使", desc: "牠的個性隨和，幾乎不會生氣。對於陌生人或其他動物都非常友善，擁有極高的包容力。" }
+    };
+
+    function calculateNumerology() {
+        const name = document.getElementById('petName').value;
+        const dateStr = document.getElementById('birthDate').value; // 格式 yyyy-mm-dd
+        const photoInput = document.getElementById('petPhoto');
+
+        if (!name || !dateStr) {
+            alert("請輸入名字和日期喔！");
+            return;
+        }
+
+        // 1. 處理照片預覽 (使用 FileReader，不需要上傳伺服器)
+        if (photoInput.files && photoInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+            }
+            reader.readAsDataURL(photoInput.files[0]);
+        } else {
+            // 如果沒傳照片，給一個預設圖或隱藏
+            document.getElementById('previewImg').src = "https://placehold.co/150x150?text=No+Image";
+        }
+
+        // 2. 計算生命靈數
+        // 移除 - 符號，變成純數字字串，例如 20231127
+        let numbers = dateStr.replace(/-/g, ''); 
+        let sum = 0;
+        
+        // 第一次加總
+        for (let char of numbers) {
+            sum += parseInt(char);
+        }
+
+        // 遞迴加總直到變成個位數 (1-9)
+        while (sum > 9) {
+            let tempSum = 0;
+            let sumStr = sum.toString();
+            for (let char of sumStr) {
+                tempSum += parseInt(char);
+            }
+            sum = tempSum;
+        }
+
+        // 3. 顯示結果
+        document.getElementById('displayName').textContent = name;
+        document.getElementById('displayNumber').textContent = sum;
+        document.getElementById('traitTitle').textContent = personalities[sum].title;
+        document.getElementById('traitDescription').textContent = personalities[sum].desc;
+
+        document.getElementById('resultArea').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
